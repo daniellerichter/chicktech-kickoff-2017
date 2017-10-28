@@ -2,3 +2,6 @@ Add a "click to start" to your game
 Add a timer to your game
 Add a minimum score (game over if you get below it)
 Add something for your player to collect (stars, coins?)
+
+Explore phaser for more ideas! 
+http://phaser.io/
