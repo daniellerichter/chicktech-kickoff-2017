@@ -1,0 +1,94 @@
+HTML Highlights: 
+
+Starting HTML Page - copy and paste this to start a new page
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+Tag basics: 
+Each tag needs an opening and a closing matching tag or the browser may not be able 
+to interpret it correctly. An opening tag starts with a <, the name of the tag, and then
+a >. A closing tag starts with a </, the name of the tag, and a >
+
+Example: 
+Opening <html>
+	... put stuff here inside the tag ..
+Closing </html>
+
+Parts of an Html Document
+<html> tag -> Declares a new Html document 
+
+<head> tag -> This is listed at the top of the page. Inside of the head tag, you can find
+a variety of things: 
+	<title> tag: Puts the title of the page on the tab in your browser:
+	<title>My awesome website </title>
+
+	<style type="text/css"> tag: Attach a style sheet to a website or write css in the 
+	                             web page
+	<style type="text/css">	
+		color: black;
+	</style>
+	
+	<link> tag: Used to link an external css file to your html page. If you have an html file you would like to load in a separate folder, this tag will load it into your site. For example, if you have a mystyle.css located in a folder css/styles then you would load it like: 
+				
+	<link rel="stylesheet" type="text/css" href="css/styles/mystyle.css">
+*Note the link tag has no closing tag
+	
+	<script> tag: This tag allows you to write javascript on the page or load javascript from a file. Script tags are loaded and run in the order you put them in. If you need to load a library, and then write some scripts, the library should be listed first. 
+				  
+To write it directly on the page:
+<script> //write some javascript here </script>
+					
+To load your script from a file or from a url, use the src tag
+<script src="library/phaser.min.js"></script>
+				  
+
+The Body Tag <body>: This is where all your html that will show up on the page will go.
+There are a lot of different tags that can be used here. Some of the important ones: 
+
+<h1>, <h2>, <h3>, <h4> : These tags add header text to your page with various sizes. 
+h1 is bigger than h2, h2 bigger than h3, ect...
+usage: <h1> Write your text here </h1> 
+
+<p> : This tag allows you to write plain text onto your page
+usage: <p> Here is my text! </p>
+
+<a> : Anchor tag - this tag links to another part of your site or external website. If 
+a user clicks on the content between an a tag, they will be taken to another place.
+href= inside the opening tag allows you to define the place you want the user to go
+usage: <a href="www.google.com>This is a link to google</a>
+
+<img> : This tag display an image on the page. There are a couple attributes needed along
+with an image tag.
+src="where the image is" this is required. This tells the browser where to find the image
+height="" How tall the image is in pixels
+width="" How wide the image is in pixels
+If height and width are not included, the image will load at its normal size
+usage: <img src="myimages/fun_image.jpg" height="250" width="250">
+
+<div> : This tag can be used for a couple things. You can use this tag as a box around 
+content (For example, you could put a div on the page and put an img tag inside of it),
+You can use it to write text inside, <div> My Text Goes Here </div>. A lot of people use
+a div tag to divide up the page, like a chapter in a book. If you have three parts to your
+page, you can put three <div> tags on the page to divide it up. It makes your html readable
+and also allows you to define styles and other thing on a specific section of your page
+using css. If your page has a header, some content, and a footer, your page may look
+like this: 
+<div class="header">.. Header Content ..</div>
+<div class="content"> .. Put your main content here </div>
+<div class="footer"> .. Put your footer content here </div>
+Now you can write css for the class .header, .content, and .footer and keep them separate
+from each other
+usage: <div> ..Put your content here.. </div> 
+
+Other tags can be found here: 
+http://www.w3schools.com/tags/default.asp

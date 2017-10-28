@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>ChickTech JavaScript</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js"></script>
+
+    <!--loading our CSS file-->
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+
+<script type="text/javascript">
+
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+    //These three functions are required for phaser!
+    //Preload loads everything your game needs - sprites, images, etc
+    function preload() {
+        game.load.image('sky', 'assets/sky.png');
+        game.load.image('ground', 'assets/platform.png');
+        game.load.spritesheet('hp', 'assets/hpsprite.png', 32, 48);
+
+    }
+
+    //Create sets up your game for you - most of your code will probably be here!
+    function create() {
+
+        //add the sky
+        game.add.sprite(0, 0, 'sky');
+
+        //add a group to hold the ground
+        platforms = game.add.group();
+
+        //enable physics on the platforms group
+        platforms.enableBody = true;
+
+        // Here we create the ground.
+        var ground = platforms.create(0, game.world.height - 64, 'ground');
+
+        //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+        ground.scale.setTo(2, 2);
+
+        //  This stops it from falling away when you jump on it
+        ground.body.immovable = true;
+
+        //add player
+        //the first 2 arguments are x and y, then the last is the key of your image
+        player = game.add.sprite(32, game.world.height - 150, 'hp');
+
+        //enable physics on player
+        game.physics.arcade.enable(player);
+
+        //give player gravity
+        player.body.gravity.y = 300;
+
+        player.animations.add('left', [4, 5, 6, 7], 10, true);
+        player.animations.add('right', [8, 9, 10, 11], 10, true);
+
+
+        //  Our controls.
+        cursors = game.input.keyboard.createCursorKeys();
+
+    }
+
+    //Update is continously called while the game is being played - add things like
+    //tracking arrow keys, etc here!
+    function update() {
+
+    //check if player is touching the platform - stops from falling through ground
+    game.physics.arcade.collide(player, platforms);
+
+      //  Reset the players velocity (movement)
+      player.body.velocity.x = 0;
+
+        //left key control
+        if (cursors.left.isDown)
+        {
+            //  Move to the left
+            player.body.velocity.x = -200;
+
+            player.animations.play('left');
+        }
+        //right key control
+        else if (cursors.right.isDown)
+        {
+            //  Move to the right
+            player.body.velocity.x = 200;
+
+            player.animations.play('right');
+        }
+        //no keys pressed
+        else
+        {
+            //  Stand still
+            player.animations.stop();
+
+            player.frame = 0;
+        }
+
+    }
+
+    //add any extra functions you need here! 
+
+
+</script>
+
+</body>
+</html>

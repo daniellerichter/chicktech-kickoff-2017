@@ -1,0 +1,146 @@
+Phaser cheat sheet
+
+These are all functions for various phaser methods. Replace anything in ** with your information
+- for example, if it says '*imageName*', replace *imageName* with the name of the image you want to use.
+If there are single quotes ('') or double quotes ("") around something, leave those there.
+
+x and y refer to the x and y coordinates of the screen where the object will be placed. 0, 0 is in the top left corner - the numbers refer to how far right and down the object is from the top left corner.
+
+//creates the game - leave this line as is! (800 by 600 is the size of the game)
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+PRELOAD FUNCTION METHODS
+-------------------------
+//load an image into the game - does NOT put the image on the screen, just tells the game it's available
+ game.load.image('imageName', 'imagePath');
+
+//load a sprite into the game - does NOT put the sprite on the screen, just tells the game it's available
+ game.load.spritesheet('spriteName', 'spritePath', frameWidth, frameHeigh);
+
+ CREATE FUNCTION METHODS
+ -----------------------
+
+ //adds the sprite to the game (this puts it on the screen)
+ game.add.sprite(x, y, 'imageName');
+
+//creates a group in the game - you can then use groupName (you can rename this whatever you want - snitches, bludgers, jellybeans, whatever you're feeling)
+var groupName = game.add.group();
+
+//creates a new sprite as a member of the group "groupName"
+var groupObject = groupName.create(x, y, 'imageName');
+
+//this gives every object created in this group a "physics body"  - a way for you to do things like detect when it hits other things, have gravity, etc
+groupName.enableBody = true;
+
+//this resizes an object
+groupObject.scale.setTo(percent, percent);
+
+//enables physics on a single sprite - lets you add gravity, velocity, etc
+game.physics.arcade.enable(spriteName);
+
+//adds an animation to be used for a sprite
+//frames will be an array (surrounded by []) - a list of frames to play for the animation
+//you can use 10 for frameRate
+//loop will be true or false - if you want to loop the frames or not
+spriteName.animations.add('animationName', [comma separated list of frames to play], frameRate, loop);
+
+//adds left & right velocity - negative number moves left, positive number moves right
+//the bigger the number, the faster the velocity (or speed)
+spriteName.body.velocity.x = number;
+
+//adds left & right velocity - negative number moves up positive number moves down
+//the bigger the number, the faster the velocity (or speed)
+spriteName.body.velocity.y = number;
+
+//sets gravity on the sprite - the higher the number, the "heavier" the gravity
+spriteName.body.gravity.y = number;
+
+//adds text to the screen and assigns to the textVar variable
+//you can change the number of pixels with fontSize, and fill is the color - (google CSS colors)
+textVar = game.add.text(x, y, 'text', { fontSize: '32px', fill: '#000' });
+
+//create a loop that calls the function every specified number of milliseconds
+//(there are 1000 milliseconds in a second - multiply number of seconds by 1000)
+game.time.events.loop(numOfMilliseconds, functionNameToCall);
+
+UPDATE FUNCTION
+-----------------
+//check for overlap between objects
+game.physics.arcade.overlap(spriteName, groupName, functionNameToCall, null, this);
+
+function functionNameToCall(spriteName, groupObject) {
+    //update score variable, if you've added one
+    score++;
+
+    //kill snitch
+    groupObject.kill();
+
+    //update the scoreText variable to reflect the score in the game
+    scoreText.text = 'Score: ' + score;
+}
+
+//  Reset the players velocity (movement)
+// without this, the player will continue moving without keys pressed!
+player.body.velocity.x = 0;
+
+ADD KEYBOARD CONTROLS
+-----------------------
+
+in the create() function
+
+//this tells phaser to create cursor keys for you
+ cursors = game.input.keyboard.createCursorKeys();
+
+in the update() function
+
+//this detects when the key is pressed down - you can replace 'left' with right, up, or down
+//and executes the code inside the curly braces
+//add as many of these as you want to response to keyboard arrow controls
+ if (cursors.left.isDown)
+ {
+     //  Move to the left
+     player.body.velocity.x = -200;
+
+    //plays the 'left' animation registered with spriteName.animations.add
+     player.animations.play('left');
+ }
+
+//add this at the bottom of all of your if statements for keys
+//this tells player to not move when you aren't pressing a key down
+ else
+{
+    //  Stand still
+    player.animations.stop();
+
+}
+
+
+CREATE A GAME TIMER
+--------------------
+
+in the create() function
+
+//create the timer
+timer = game.time.create(false);
+
+//add the timed event of 15000 milliseconds (or 15 seconds) and call timeUp when its done
+timer.add(15000, timeUp, this);
+
+//start the timer event
+timer.start();
+
+outside the create function
+
+//handle time up event
+function timeUp() {
+    //stop the loops
+    game.time.events.stop();
+
+    //get rid of all the active snitches
+    groupName.forEach(function(element) {
+        element.kill();
+    });
+
+    //display time up message
+    game.add.text(350, 250, 'Time\'s up!', { fontSize: '32px', fill: '#000' });
+}

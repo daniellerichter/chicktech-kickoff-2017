@@ -1,0 +1,149 @@
+CSS Basics:
+
+CSS stands for cascading style sheet. No one ever uses the word cascading anymore, so
+everyone calls it css. 
+
+css is a way to add style and customization to an html page. Think of the html page
+as the skeleton of the website - what order things appear in, what extra files are loaded
+(like css, images, and javascript files), and what the main content is. Css is the place
+where you take your content and customize it with colors and styles 
+
+Here is an example of what one can do when you use css to style a page: 
+http://www.csszengarden.com/219/
+
+All major web browsers have a big list of attributes that can be applied to an html 
+element. Some of these include defining color, text size, background color, border, 
+where on the page the element is, ect... Css is the place where we define what an
+html element looks like when our page is loaded. 
+
+Example css file:
+
+A css file (.css) will have one or more style definitions in this format
+
+(What to style){
+	attribute: definition;
+	attribute: deifinition;
+	attribute: definition;
+}
+
+Here is an example of styling a body tag (remember this is where your main content
+goes in a web site): 
+
+body {
+	height: 500px;
+	width: 500px;
+	background-color: blue;
+	color: white;
+}
+
+This will make our body tag 500 pixels tall, 500 pixels wide, have a background color
+of blue and all the body text will be white (color defines what color the text is)
+
+Defining your own class: 
+It is nice to style an html tag, like body or p or div. But what if you want to define
+a style for a group of elements. Maybe you have some pictures on your page and you want
+to define a border around all of them. You can define a class, which is a list of 
+attributes like the ones above, and then apply that class to one or more html elements. 
+
+To define a class, you put a . followed by the name of your class. Usually, if you want
+to name something with multiple words, its good to put a - in between the words since we 
+can't put a space in our class name: 
+
+Here is a class called green-border
+
+.green-border{
+	border: 1px solid green;
+}
+
+This puts a 1 pixel solid border colored green around any html element with the class
+"green-border" around it. If the HTML looks like this
+
+<img src="images/my_image.jpg" class="green-border"> then the green-border class will be 
+applied to this element. 
+
+You can list multiple classes in an html element. Suppose there is another class that 
+puts a 15 pixel margin on an element
+
+.margin-15{
+	margin: 15px:
+}
+
+Our image above can acquire that class as well by simply adding a space and typing the
+name of the second class: 
+<img src="images/my_image.jpg" class="green-border margin-15">
+The image above will now have a green border and a 15 pixel margin. 
+
+Defining an ID Style:
+Classes are good for styling a group or groups of similar elements so you don't have to
+write the same style over and over. What happens if you have a single element and want
+to apply a unique style? The best way to do this is with an ID style.
+
+To define an ID Style, use the # symbol: 
+
+#green-border 
+{
+	border: 1px solid green;
+}
+
+now everything with the id "green-border" in html will have that style. HTML Id's are 
+normally used for a single element - while more than one can have the same id, it is 
+much less confusing if each element with an id has a unique id. To use our green-border
+class, the html would look like this: 
+
+<img id="green-border" src="images/my_image.jpg">
+
+The rule of thumb - a CSS class is for a group of elements and an id style is for a
+single element. 
+
+Margin and Padding: Two attributes you need to know. 
+Margin and padding are two of the most common css elements you will see. When an element
+is put on a page, margin and padding can be used to adjust where the element falls on the
+page. 
+
+Every element on an html page has an invisible box drawn around it. Changing the margin
+on that element will increase the space between the element's invisible box and the 
+other elements around it. If an image has a margin of 15 around it, there will be 15
+pixels of space between that image and everything else. You can define either right, left,
+top, or bottom margins, or all four by using the word margin: 
+
+.image-with-margin{
+	margin-left: 10px;
+	margin-right: 15px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+In the above class, there will be 10 pixels of left space, 15 pixels of right space, 
+25 pixels of top space, and 25 pixels of bottom space. 
+
+Padding: You can think of margins as space outside the box, and padding as the space
+inside the box. If I have a <h1> element with the text "My Header" on it, it will have
+that invisible box drawn around it. The inside text may appear like this: 
+
+My Header
+
+Padding changes the space of all the elements inside that invisible box. By putting 
+padding on an element, it will remain in the same place but the contents inside will move
+based on the padding. If we added left padding to the My Header tag, it would appear like
+this: 
+
+	My Header
+	
+If there is multiple elements in an element (like a <div> that has a <img> and a <p> tag)
+all those inside elements will get any padding the div will have. Padding can also
+be defined as left, right, top, and bottom as above, or all together with the word 
+padding: 
+
+.padding-element{
+	padding-left: 5px;
+	padding-right: 10px
+	padding-top: 15px;
+	padding-bottom: 5px;
+}	
+
+
+
+
+
+
+
